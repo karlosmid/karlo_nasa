@@ -63,7 +63,9 @@ defmodule Nasa.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
-      {:decimal, "~> 2.3.0"}
+      {:decimal, "~> 2.3.0"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -83,7 +85,8 @@ defmodule Nasa.MixProject do
         "esbuild nasa --minify",
         "phx.digest"
       ],
-      precommit: ["compile --warning-as-errors", "deps.unlock --unused", "format", "test"]
+      precommit: ["compile --warning-as-errors", "deps.unlock --unused", "format", "test"],
+      quality: ["format --check-formatted", "credo --strict", "dialyzer --format github"]
     ]
   end
 end
