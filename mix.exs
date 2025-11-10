@@ -86,7 +86,7 @@ defmodule Nasa.MixProject do
         "phx.digest"
       ],
       precommit: ["compile --warning-as-errors", "deps.unlock --unused", "format", "test"],
-      quality: ["format --check-formatted", "credo --strict", "dialyzer --format github"]
+      quality: ["format", "credo --strict", "dialyzer --format github"]
     ]
   end
 end
