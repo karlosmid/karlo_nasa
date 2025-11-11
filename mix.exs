@@ -11,7 +11,13 @@ defmodule Nasa.MixProject do
       aliases: aliases(),
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+      source_url: "https://github.com/karlosmid/karlo_nasa",
+      docs: [
+        # which page to show first
+        main: "readme",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -65,7 +71,8 @@ defmodule Nasa.MixProject do
       {:bandit, "~> 1.5"},
       {:decimal, "~> 2.3.0"},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false}
     ]
   end
 

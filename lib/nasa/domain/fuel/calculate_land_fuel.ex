@@ -1,12 +1,12 @@
-defmodule Nasa.Domain.Launch.CalculateFuel do
+defmodule Nasa.Domain.Land.CalculateFuel do
   @moduledoc """
-  Calculates required launching fuel
+  Calculates required landing fuel
   """
   alias Nasa.Domain.CalculateFuel
   alias Nasa.Domain.Util
 
   @doc """
-  Calculates required launch fuel for a object.
+  Calculates required land fuel for a object.
 
   ## Parameteres
 
@@ -15,12 +15,12 @@ defmodule Nasa.Domain.Launch.CalculateFuel do
 
   ## Examples
 
-      iex> Nasa.Domain.Launch.CalculateFuel.launch([mass: Decimal.new("28801"), gravity: Decimal.new("9.807")])
-      Decimal.new("19747")
+      iex> Nasa.Domain.Land.CalculateFuel.land([mass: Decimal.new("28801"), gravity: Decimal.new("9.807")])
+      Decimal.new("13421")
   """
-  @spec launch(mass: Decimal.t(), gravity: Decimal.t()) :: integer() | {:error, binary()}
-  def launch(mass: %Decimal{} = mass, gravity: %Decimal{} = gravity) do
-    case Util.check_params(Application.get_env(:nasa, :launch, values: ["0.042", "33"])[:values]) do
+  @spec land(mass: Decimal.t(), gravity: Decimal.t()) :: integer() | {:error, binary()}
+  def land(mass: %Decimal{} = mass, gravity: %Decimal{} = gravity) do
+    case Util.check_params(Application.get_env(:nasa, :land, values: ["0.033", "42"])[:values]) do
       [param1: param1, param2: param2] ->
         fuel =
           CalculateFuel.calculate(mass: mass, gravity: gravity, param1: param1, param2: param2)
