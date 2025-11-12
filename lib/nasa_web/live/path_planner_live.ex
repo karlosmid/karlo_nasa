@@ -87,8 +87,10 @@ defmodule NasaWeb.PathPlannerLive do
         _params,
         socket
       ) do
+      path_list = PathFuel.recalculate_fuel(paths: Enum.reverse(socket.assigns.path_list))
+
     total_fuel =
-      PathFuel.recalculate_fuel(paths: Enum.reverse(socket.assigns.path_list))
+      path_list
       |> Enum.reduce(Decimal.new("0"), fn %{
                                             action: _action,
                                             planet: _planet,
@@ -99,7 +101,7 @@ defmodule NasaWeb.PathPlannerLive do
         Decimal.add(acc, fuel)
       end)
 
-    {:noreply, socket |> assign_fuel(total_fuel)}
+    {:noreply, socket |> assign_path_list(path_list) |> assign_fuel(total_fuel)}
   end
 
   defp path_as_string(%{action: action, planet: planet, mass: mass, fuel: fuel}),
