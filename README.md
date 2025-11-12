@@ -7,6 +7,14 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000/path) from your browser.
 
+- select your path
+- add path
+- when you have your flight path
+- calculate path fuel
+- clear for next path
+
+
+
 
 ## quality
 
