@@ -1,0 +1,55 @@
+<Layouts.app flash={@flash}>
+  <.header>
+    Path planner for your next journy!
+    <:subtitle>It automatically calculates needed fuel based on your spaceship mass.</:subtitle>
+  </.header>
+
+  <div>
+    <.simple_form for={@form} id="path-form" phx-change="validate" phx-submit="save">
+      <.input field={@form[:mass]} type="text" label="Spaceship mass in kg" />
+      <.input
+        field={@form[:spaceship_action]}
+        type="select"
+        label="Spaceship Action"
+        options={["launch", "land"]}
+        phx-debounce="blur"
+      />
+      <.input
+        field={@form[:planet]}
+        type="select"
+        label="Planet"
+        options={["earth", "moon", "mars"]}
+        phx-debounce="blur"
+      />
+
+      <:actions>
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Submit the form data -->
+          <.button type="submit" phx-disable-with="Adding path ...">
+            Add path
+          </.button>
+          
+<!-- Plain buttons that trigger LiveView events -->
+          <.button type="button" phx-click="clear" phx-disable-with="Clearing path ...">
+            Clear
+          </.button>
+
+          <.button type="button" phx-click="calculate" phx-disable-with="Calculating fuel ...">
+            Calculate fuel
+          </.button>
+        </div>
+      </:actions>
+    </.simple_form>
+
+    <.header>
+      Total fuel: {@fuel}
+      <div class="grid gap-4">
+        <%= for path <- Enum.reverse(@path_list) do %>
+          <div class="border p-4 rounded-lg">
+            <h3 class="font-semibold">{path_as_string(path)}</h3>
+          </div>
+        <% end %>
+      </div>
+    </.header>
+  </div>
+</Layouts.app>

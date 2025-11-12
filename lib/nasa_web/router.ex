@@ -18,6 +18,8 @@ defmodule NasaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/path", PathPlannerLive
   end
 
   # Other scopes may use custom stacks.
